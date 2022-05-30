@@ -68,7 +68,7 @@ public class MappingUtils {
     }
 
     public void mapEntityToJSON (DetectorEntity entity) throws java.io.IOException {
-        FileWriter file = new FileWriter("/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemoWithSql/src/main/java/com/example/fabitDemoWithSql/frameworks/dataStroges/test.json");
+        FileWriter file = new FileWriter(filePath);
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             file.write(gson.toJson(entity));
@@ -84,7 +84,7 @@ public class MappingUtils {
 
 
     public DetectorEntity mapJSONtoEntity () throws java.io.IOException {
-        try (FileReader reader = new FileReader("/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemoWithSql/src/main/java/com/example/fabitDemoWithSql/frameworks/dataStroges/test.json");) {
+        try (FileReader reader = new FileReader(filePath)) {
             Gson gson = new Gson();
             DetectorEntity entity = gson.fromJson(reader, DetectorEntity.class);
             return entity;
