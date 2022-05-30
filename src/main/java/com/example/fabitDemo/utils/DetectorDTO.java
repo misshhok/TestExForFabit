@@ -6,7 +6,6 @@ import com.example.fabitDemo.entity.ZoneEntity;
 
 public class DetectorDTO {
 
-    //    TODO: сделать unit-tests на DTO объекты
     private State state;
     private String address;
     private String serialNumber;

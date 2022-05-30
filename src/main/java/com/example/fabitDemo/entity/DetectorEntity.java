@@ -2,7 +2,6 @@ package com.example.fabitDemo.entity;
 
 public class DetectorEntity {
 
-    //    TODO: сделать unit-tests на все сущности
     private State state;
     private String serialNumber;
     private String model;

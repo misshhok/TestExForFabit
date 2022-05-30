@@ -13,6 +13,8 @@ import java.io.IOException;
 
 @Service
 public class MappingUtils {
+
+    String filePath = "/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemo/src/main/java/com/example/fabitDemo/frameworks/dataStroges/test.json";
     public DetectorDTO mapEntityToDTO (DetectorEntity entity) {
         DetectorDTO dto = new DetectorDTO();
         dto.setAddress(entity.getAddress());
@@ -36,7 +38,7 @@ public class MappingUtils {
     }
 
     public void mapDtoToJSON (DetectorDTO dto) throws java.io.IOException {
-        FileWriter file = new FileWriter("/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemoWithSql/src/main/java/com/example/fabitDemoWithSql/frameworks/dataStroges/test.json");
+        FileWriter file = new FileWriter(filePath);
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             file.write(gson.toJson(dto));
@@ -53,7 +55,7 @@ public class MappingUtils {
 
     public DetectorDTO mapJSONtoDTO () throws java.io.IOException {
 
-        try (FileReader reader = new FileReader("/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemoWithSql/src/main/java/com/example/fabitDemoWithSql/frameworks/dataStroges/test.json");) {
+        try (FileReader reader = new FileReader(filePath)) {
 
             Gson gson = new Gson();
             DetectorDTO dto = gson.fromJson(reader, DetectorDTO.class);
