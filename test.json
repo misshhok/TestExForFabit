@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "state": "NEW",
+  "serialNumber": "20097",
+  "model": "Спектр-Д",
+  "zone": {
+    "address": "белгород",
+    "location": {
+      "latitude": 1.0,
+      "longitude": 2.0
+    },
+    "vrpDetectionArea": {
+      "x": 1,
+      "y": 1
+    }
+  },
+  "conformityCertificate": {
+    "number": "19988",
+    "expirationDate": "May 27, 2022, 9:29:30 PM"
+  }
+}
