@@ -9,38 +9,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConformityCertificateEntityTest {
 
     @Test
-    void getNumber() {
-        ConformityCertificateEntity entity = new ConformityCertificateEntity();
-        String actual = "57820-2";
-        entity.setNumber(actual);
-        String result = entity.getNumber();
-        assertEquals(result, actual);
-    }
-
-    @Test
     void setNumber() {
         ConformityCertificateEntity entity = new ConformityCertificateEntity();
-        String actual = "57820-2";
+        String actual = "578202343";
         entity.setNumber(actual);
         String result = entity.getNumber();
         assertEquals(result, actual);
     }
 
     @Test
-    void getExpirationDate() {
+    void setNumber2() {
         ConformityCertificateEntity entity = new ConformityCertificateEntity();
-        Date actual = new Date(2022-1900, 10, 11);
-        entity.setExpirationDate(actual);
-        Date result = entity.getExpirationDate();
-        assertEquals(result, actual);
+        String actual = "111111111111111111111111111111111111111111111111111111111111111111111111111";
+        entity.setNumber(actual);
+        String result = entity.getNumber();
+        assertEquals(result, null);
     }
 
     @Test
-    void setExpirationDate() {
-        ConformityCertificateEntity entity = new ConformityCertificateEntity();
-        Date actual = new Date(2022-1900, 10, 11);
-        entity.setExpirationDate(actual);
-        Date result = entity.getExpirationDate();
-        assertEquals(result, actual);
+    void testSetNumber() {
     }
 }
