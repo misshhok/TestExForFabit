@@ -12,15 +12,7 @@ public class GPSHelper {
     private static double rad(double d) {
         return d * Math.PI / 180.0;
     }
-    /**
-     * На основе алгоритма в googleMap для получения расстояния между двумя широтой и долготой,
-     * Точность расчета аналогична точности расстояния в Google Maps, а диапазон разницы составляет менее 0,2 метра.
-     * @param lon1 Долгота первой точки
-     * @param lat1 Широта первой точки
-     * @param lon2 Долгота второй точки
-     * @param lat3 Широта второй точки
-     * @return возвращает расстояние в км
-     * */
+
     public static double GetDistance(double lon1,double lat1,double lon2, double lat2) {
         double radLat1 = rad(lat1);
         double radLat2 = rad(lat2);

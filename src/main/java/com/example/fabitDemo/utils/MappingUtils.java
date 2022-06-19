@@ -5,16 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Service;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import java.io.*;
 
 
 @Service
 public class MappingUtils {
 
-    String filePath = "/Users/michaelsmirnov/Desktop/fabit_test/java/fabit/fabitDemo/src/main/java/com/example/fabitDemo/frameworks/dataStroges/test.json";
+    String filePath = "/Users/michaelsmirnov/Desktop/java/fabit_test/java/fabit/fabitProject/src/main/java/com/example/fabitDemo/frameworks/dataStroges/test.json";
     public DetectorDTO mapEntityToDTO (DetectorEntity entity) {
         DetectorDTO dto = new DetectorDTO();
         dto.setAddress(entity.getAddress());
@@ -81,13 +78,27 @@ public class MappingUtils {
             file.close();
         }
     }
-
+    public Boolean FileIsEmpty() throws IOException {
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            if (br.readLine() == "") {
+                System.out.println("No errors, and file empty");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public DetectorEntity mapJSONtoEntity () throws java.io.IOException {
-        try (FileReader reader = new FileReader(filePath)) {
-            Gson gson = new Gson();
-            DetectorEntity entity = gson.fromJson(reader, DetectorEntity.class);
-            return entity;
+        try (FileReader reader = new FileReader(filePath) ) {
+                Gson gson = new Gson();
+                DetectorEntity entity = gson.fromJson(reader, DetectorEntity.class);
+                return entity;
         }
         catch (IOException e) {
             e.printStackTrace();

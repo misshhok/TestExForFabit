@@ -6,14 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GpsCoordEntityTest {
 
-    @Test
-    void getLatitude() {
-        GpsCoordEntity entity = new GpsCoordEntity();
-        double actual = 48.9;
-        entity.setLatitude(actual);
-        double result = entity.getLatitude();
-        assertEquals(result,actual);
-    }
 
     @Test
     void setLatitude() {
@@ -25,18 +17,38 @@ class GpsCoordEntityTest {
     }
 
     @Test
-    void getLongitude() {
+    void setLatitude1() {
         GpsCoordEntity entity = new GpsCoordEntity();
-        double actual = 49.9;
+        double actual = 10000.0;
+        entity.setLatitude(actual);
+        double result = entity.getLatitude();
+        assertEquals(result,null);
+    }
+
+    @Test
+    void setLatitude2() {
+        GpsCoordEntity entity = new GpsCoordEntity();
+        double actual = -10000.0;
+        entity.setLatitude(actual);
+        double result = entity.getLatitude();
+        assertEquals(result,null);
+    }
+
+
+
+    @Test
+    void setLongitude() {
+        GpsCoordEntity entity = new GpsCoordEntity();
+        double actual = 13.6;
         entity.setLongitude(actual);
         double result = entity.getLongitude();
         assertEquals(result,actual);
     }
 
     @Test
-    void setLongitude() {
+    void setLongitude1() {
         GpsCoordEntity entity = new GpsCoordEntity();
-        double actual = 13.6;
+        double actual = -2332.6;
         entity.setLongitude(actual);
         double result = entity.getLongitude();
         assertEquals(result,actual);

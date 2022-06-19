@@ -1,18 +1,18 @@
 package com.example.fabitDemo.entity;
 
-import java.util.Date;
-public class ConformityCertificateEntity {
+import com.example.fabitDemo.entity.exceptions.ValidationException;
+import com.example.fabitDemo.entity.validators.ConformityCertificateValidator;
 
+
+import java.util.Date;
+
+public class ConformityCertificateEntity {
     private String number;
     private java.util.Date expirationDate;
 
     public ConformityCertificateEntity() {
     }
 
-    public ConformityCertificateEntity(String number, Date expirationDate) {
-        this.number = number;
-        this.expirationDate = expirationDate;
-    }
 
 
 
@@ -22,7 +22,13 @@ public class ConformityCertificateEntity {
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        try {
+            ConformityCertificateValidator.validNumber(number);
+            this.number = number;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 
     public Date getExpirationDate() {

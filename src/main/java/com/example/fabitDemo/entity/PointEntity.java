@@ -1,5 +1,8 @@
 package com.example.fabitDemo.entity;
 
+import com.example.fabitDemo.entity.exceptions.ValidationException;
+import com.example.fabitDemo.entity.validators.PointValidator;
+
 public class PointEntity {
 
     private int x;
@@ -19,7 +22,13 @@ public class PointEntity {
     }
 
     public void setX(int x) {
-        this.x = x;
+        try {
+            PointValidator.validX(x);
+            this.x = x;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 
     public int getY() {
@@ -27,6 +36,12 @@ public class PointEntity {
     }
 
     public void setY(int y) {
-        this.y = y;
+        try {
+            PointValidator.validY(y);
+            this.y = y;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 }

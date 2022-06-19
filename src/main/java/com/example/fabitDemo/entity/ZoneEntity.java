@@ -1,6 +1,9 @@
 package com.example.fabitDemo.entity;
 
 
+import com.example.fabitDemo.entity.exceptions.ValidationException;
+import com.example.fabitDemo.entity.validators.ZoneValidator;
+
 import java.util.ArrayList;
 
 public class ZoneEntity {
@@ -35,7 +38,13 @@ public class ZoneEntity {
     }
 
     public void setLocation(GpsCoordEntity location) {
-        this.location = location;
+        try {
+            ZoneValidator.validLocation(location);
+            this.location = location;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 
     public ArrayList<PointEntity> getVrpDetectionArea() {
@@ -43,6 +52,12 @@ public class ZoneEntity {
     }
 
     public void setVrpDetectionArea(ArrayList<PointEntity> vrpDetectionArea) {
-        this.vrpDetectionArea = vrpDetectionArea;
+        try {
+            ZoneValidator.validVrpDetectionArea(vrpDetectionArea);
+            this.vrpDetectionArea = vrpDetectionArea;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 }

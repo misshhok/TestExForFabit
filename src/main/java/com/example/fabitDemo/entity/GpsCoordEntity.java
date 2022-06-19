@@ -1,7 +1,9 @@
 package com.example.fabitDemo.entity;
 
-public class GpsCoordEntity {
+import com.example.fabitDemo.entity.exceptions.ValidationException;
+import com.example.fabitDemo.entity.validators.GpsCoordValidator;
 
+public class GpsCoordEntity {
     private double latitude;
     private double longitude;
 
@@ -22,7 +24,13 @@ public class GpsCoordEntity {
     }
 
     public void setLatitude(double latitude) {
-        this.latitude = latitude;
+        try {
+            GpsCoordValidator.validLatitude(latitude);
+            this.latitude = latitude;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 
     public double getLongitude() {
@@ -30,7 +38,13 @@ public class GpsCoordEntity {
     }
 
     public void setLongitude(double longitude) {
-        this.longitude = longitude;
+        try {
+            GpsCoordValidator.validLatitude(longitude);
+            this.longitude = longitude;
+        }
+        catch (ValidationException e) {
+            e.getMessage();
+        }
     }
 
 }
