@@ -13,7 +13,6 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 public class DetectorController {
-    @Autowired
     DetectorUseCase detectorUseCase = new DetectorUseCase();
 
 
@@ -30,7 +29,8 @@ public class DetectorController {
     @PutMapping( value = "/api/detector/initialized", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity detectorInitialize(@RequestBody DetectorInitJson detectorInitJSON) {
         try {
-            return ResponseEntity.ok().body(detectorUseCase.DetectorInit(detectorInitJSON.getSerialNumber(), detectorInitJSON.getModel(), detectorInitJSON.getConformityCertificate()));
+            detectorUseCase.DetectorInit(detectorInitJSON.getSerialNumber(), detectorInitJSON.getModel(), detectorInitJSON.getConformityCertificate());
+            return ResponseEntity.ok().body("успешная инициализация дектора");
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Ошибка в параметрах запроса. Запрос не следует повторять");
@@ -40,8 +40,8 @@ public class DetectorController {
     @PutMapping(value ="/api/detector/active", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity detectorActivate(@RequestBody DetectorActivateJson detectorActivateJson) {
         try {
-
-            return ResponseEntity.ok().body(detectorUseCase.DetectorActive(detectorActivateJson.getAddress(), detectorActivateJson.getLocation(), detectorActivateJson.getZone()));
+            detectorUseCase.DetectorActive(detectorActivateJson.getAddress(), detectorActivateJson.getLocation(), detectorActivateJson.getZone());
+            return ResponseEntity.ok().body("Успешная активация детектора");
         }
         catch (Exception e) {
             return ResponseEntity.badRequest().body("Ошибка в параметрах запроса. Запрос не следует повторять");

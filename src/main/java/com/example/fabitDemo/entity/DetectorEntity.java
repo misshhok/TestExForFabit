@@ -146,7 +146,7 @@ public class DetectorEntity {
         }
     }
 
-    public void Activate() throws StateChangeException {
+    public void Activate(String address, GpsCoordEntity location, ZoneEntity zone) throws StateChangeException {
         if (this.getState() == State.SETUP) {
             this.setLocation(location);
             this.setAddress(address);

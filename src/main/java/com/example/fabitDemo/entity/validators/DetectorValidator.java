@@ -1,7 +1,7 @@
 package com.example.fabitDemo.entity.validators;
 
 import com.example.fabitDemo.entity.ConformityCertificateEntity;
-import com.example.fabitDemo.entity.DetectorEntity;
+
 import com.example.fabitDemo.entity.ZoneEntity;
 import com.example.fabitDemo.entity.exceptions.ValidationException;
 import com.example.fabitDemo.entity.GpsCoordEntity;

@@ -1,6 +1,12 @@
 package com.example.fabitDemo.usecases;
 
-interface DataStorage {
-    public void read();
-    public void write();
+import com.example.fabitDemo.entity.DetectorEntity;
+
+import java.io.IOException;
+
+public interface DataStorage {
+    public DetectorEntity read();
+    public void write(DetectorEntity entity) throws IOException;
+
+    public boolean checkIfExists();
 }
