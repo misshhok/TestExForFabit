@@ -1,81 +1,48 @@
 package com.example.fabitDemo.usecases;
 
 import com.example.fabitDemo.entity.*;
+
 import com.example.fabitDemo.entity.exceptions.StateChangeException;
+import com.example.fabitDemo.usecases.Exceptions.UseCaseException;
+
 
 import java.io.IOException;
 
 
 public class DetectorUseCase extends JsonDataStorage {
-    public void DetectorInit(String serialNumber, String model, ConformityCertificateEntity conformityCertificate)  {
-        try {
-            if (checkIfExists()) {
-                DetectorEntity entity = new DetectorEntity();
-                entity.Init(serialNumber, model, conformityCertificate);
-                write(entity);
-            }
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
-
-
-    public void DetectorActive(String address, GpsCoordEntity location, ZoneEntity zone) {
-        try {
-            DetectorEntity entity = read();
-            entity.Activate(address, location, zone);
+    public void DetectorInit(String serialNumber, String model, ConformityCertificateEntity conformityCertificate) throws UseCaseException, IOException {
+        if (checkIfExists()) {
+            DetectorEntity entity = new DetectorEntity();
+            entity.Init(serialNumber, model, conformityCertificate);
             write(entity);
-        }
-        catch (StateChangeException stateChangeException) {
-            System.out.println(stateChangeException.getMessage());
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
+        } else {
+            throw new UseCaseException("Ошибка в параметрах запроса. Запрос не следует повторять");
         }
     }
 
-    public String DetectorSetup() {
-        try {
-            DetectorEntity entity = read();
-            entity.Setup();
-            write(entity);
-            return "Успешный перевод в настройку";
-        }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (StateChangeException e) {
-            System.out.println(e.getMessage());
-        }
-        return "Ошибка перевода в настройку";
+
+
+    public void DetectorActive(String address, GpsCoordEntity location, ZoneEntity zone) throws StateChangeException, IOException {
+        DetectorEntity entity = read();
+        entity.Activate(address, location, zone);
+        write(entity);
     }
 
-    public String DetectorReset() {
-        try {
-                DetectorEntity entity = read();
-                entity.Reset();
-                write(entity);
-                return "Успешный сброс настроек";
-            }
-        catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (StateChangeException e) {
-            System.out.println(e.getMessage());
-        }
-        return "Ошибка сброса настроек";
+    public void DetectorSetup() throws StateChangeException, IOException {
+        DetectorEntity entity = read();
+        entity.Setup();
+        write(entity);
+    }
+
+    public void DetectorReset() throws IOException, StateChangeException {
+        DetectorEntity entity = read();
+        entity.Reset();
+        write(entity);
     }
 
     public DetectorEntity getDetector() {
-        try {
-            DetectorEntity entity = read();
-            return entity;
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+        DetectorEntity entity = read();
+        return entity;
     }
 }

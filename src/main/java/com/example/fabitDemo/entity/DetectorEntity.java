@@ -3,7 +3,9 @@ package com.example.fabitDemo.entity;
 import com.example.fabitDemo.entity.exceptions.StateChangeException;
 import com.example.fabitDemo.entity.exceptions.ValidationException;
 import com.example.fabitDemo.entity.validators.DetectorValidator;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DetectorEntity {
     private State state;
     private String serialNumber;
@@ -19,13 +21,7 @@ public class DetectorEntity {
     public DetectorEntity() {
     }
 
-    public DetectorEntity( State state, String serialNumber, String model, ConformityCertificateEntity conformityCertificate, String address) {
-        this.state = state;
-        this.serialNumber = serialNumber;
-        this.model = model;
-        this.conformityCertificate = conformityCertificate;
-        this.address = address;
-    }
+
 
     public GpsCoordEntity getLocation() {
         return location;
@@ -42,7 +38,7 @@ public class DetectorEntity {
             }
         }
         catch (ValidationException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -72,7 +68,7 @@ public class DetectorEntity {
             this.serialNumber = serialNumber;
         }
         catch (ValidationException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -86,7 +82,7 @@ public class DetectorEntity {
             this.model = model;
         }
         catch (ValidationException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -106,7 +102,7 @@ public class DetectorEntity {
             }
         }
         catch (ValidationException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -126,35 +122,50 @@ public class DetectorEntity {
     }
 
     public void Setup() throws StateChangeException {
-        if ((this.getState() == State.ACTIVE) || (this.getState() == State.NEW)) {
-            this.setState(State.SETUP);
+        try {
+            if ((this.getState() == State.ACTIVE) || (this.getState() == State.NEW)) {
+                this.setState(State.SETUP);
+            }
+            else {
+                throw new StateChangeException("Ошибка перевода детектора в настройку");
+            }
         }
-        else {
-            throw new StateChangeException("Ошибка перевода детектора в настройку");
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
     public void Reset () throws StateChangeException {
-        if (this.getState() == State.SETUP) {
-            this.setState(State.NEW);
-            this.setZone(null);
-            this.setAddress(null);
-            this.setLocation(null);
+        try {
+            if (this.getState() == State.SETUP) {
+                this.setState(State.NEW);
+                this.setZone(null);
+                this.setAddress(null);
+                this.setLocation(null);
+            }
+            else {
+                throw new StateChangeException("Ошибка сброса настроек");
+            }
         }
-        else {
-            throw new StateChangeException("Ошибка перевода детектора в настройку");
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 
     public void Activate(String address, GpsCoordEntity location, ZoneEntity zone) throws StateChangeException {
-        if (this.getState() == State.SETUP) {
-            this.setLocation(location);
-            this.setAddress(address);
-            this.setZone(zone);
-            this.setState(State.ACTIVE);
+        try {
+            if (this.getState() == State.SETUP) {
+                this.setLocation(location);
+                this.setAddress(address);
+                this.setZone(zone);
+                this.setState(State.ACTIVE);
+            }
+            else {
+                throw new StateChangeException("Ошибка активации детектора");
+            }
         }
-        else {
-            throw new StateChangeException("Ошибка перевода детектора в настройку");
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
         }
     }
 }
